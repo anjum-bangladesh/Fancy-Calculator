@@ -1,0 +1,162 @@
+<html>
+<head>
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.js"
+		integrity=
+"sha512-BbVEDjbqdN3Eow8+empLMrJlxXRj5nEitiCAK5A1pUr66+jLVejo3PmjIaucRnjlB0P9R3rBUs3g5jXc8ti+fQ=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"></scrip>
+		<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"
+		integrity=
+"sha512-iphNRh6dPbeuPGIrQbCdbBF/qcqadKWLa35YPVfMZMHBSI6PLJh1om2xCTWhpVpmUyb4IvVS9iYnnYMkleVXLA=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script>
+	
+	<style>
+		table 
+		{
+			border: 1px solid rgb(6, 6, 6);
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: auto;
+			margin-right: auto;	
+		}
+
+		input[type="button"] 
+		{
+			width: 100%;
+			padding: 20px 40px;
+			background-color: rgb(178, 231, 71);
+			color: black;
+			font-size: 24px;
+			font-weight: bolder ;
+			font-style: italic ;
+			border: 9;
+			border-radius: 300px;
+			border: 2px solid black;
+		}
+
+		input[type="text"] 
+		{
+			width: 100%;
+			padding: 20px 40px;
+			background-color: rgb(126, 203, 248);
+	
+			font-size: 24px;
+			font-weight: bold;
+			font-style: italic ;
+			border: none;
+			border-radius:300px;
+			border: 3px solid black;
+		}
+	</style>
+</head>
+
+	<body background="images/math.bg1.jpg": style="color: rgb(236, 235, 241);">
+	<table border="1" >
+        <tr>
+            <td id="calculator_label" style="background-color: rgba(136, 73, 237, 0.313);" colspan="5">
+                <h1 style="background-color:rgb(66, 7, 111) ;" id="calculator">Calculator</h1>
+            </td>
+        </tr>
+		<tr>
+			<td colspan="4"><input type="text" id="result" placeholder="Result"></td>
+			<td><input type="button" value="clear" onclick="clr()" /> </td>
+		</tr>
+		<tr>
+			<td><input type="button" value="%" onclick="dis('%')"
+                onkeydown="myFunction(event)"> </td>
+            <td><input type="button" value="1" onclick="dis('1')"
+						onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="2" onclick="dis('2')"
+						onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="3" onclick="dis('3')"
+						onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="/" onclick="dis('/')"
+						onkeydown="myFunction(event)"> </td>
+		</tr>
+		<tr>
+            <td><input type="button" value="x^2" onclick="dis('^2')"
+                onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="4" onclick="dis('4')"
+						onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="5" onclick="dis('5')"
+						onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="6" onclick="dis('6')"
+						onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="*" onclick="dis('*')"
+						onkeydown="myFunction(event)"> </td>
+		</tr>
+		<tr>
+            <td><input type="button" value="sqrt" onclick="dis('^.5')"
+                onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="7" onclick="dis('7')"
+						onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="8" onclick="dis('8')"
+						onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="9" onclick="dis('9')"
+						onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="-" onclick="dis('-')"
+						onkeydown="myFunction(event)"> </td>
+		</tr>
+		<tr>
+          <td><input type="button" value="1/x" onclick="dis('^-1')"
+            onkeydown="myFunction(event)"></td>
+            <td><input type="button" value="." onclick="dis('.')"
+                    onkeydown="myFunction(event)"> </td>
+			<td><input type="button" value="0" onclick="dis('0')"
+						onkeydown="myFunction(event)"> </td>
+			<!-- solve function call function solve to evaluate value -->
+			<td><input type="button" value="=" onclick="solve()"> </td>
+
+			<td><input type="button" value="+" onclick="dis('+')"
+						onkeydown="myFunction(event)"> </td>
+		</tr>
+	</table>
+
+	<script>
+		function dis(val) 
+		{
+			document.getElementById("result").value += val
+		}
+
+		function myFunction(event) 
+		{
+			if (event.key == '0' || event.key == '1'
+				|| event.key == '2' || event.key == '3'
+				|| event.key == '4' || event.key == '5'
+				|| event.key == '6' || event.key == '7'
+				|| event.key == '8' || event.key == '9'
+				|| event.key == '+' || event.key == '-'
+				|| event.key == '*' || event.key == '/'
+                || event.key == '%' || event.key == '^2'
+                || event.key == 'sqrt')
+				document.getElementById("result").value += event.key;        
+		}
+
+		var cal = document.getElementById("calcu");
+		cal.onkeyup = function (event) {
+			if (event.keyCode === 13) {
+				console.log("Enter");
+				let x = document.getElementById("result").value
+				console.log(x);
+				solve();
+			}
+		}
+
+		
+		function solve() {
+			let x = document.getElementById("result").value
+			let y = math.evaluate(x)
+			document.getElementById("result").value = y
+		}
+
+		
+		function clr() {
+			document.getElementById("result").value = ""
+		}
+	</script>
+</body>
+
+</html>
